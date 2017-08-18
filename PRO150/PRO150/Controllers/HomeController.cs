@@ -16,7 +16,7 @@ namespace PRO150.Controllers
         {
             return View();
         }
-        public JsonResult NewGame(string color, int? gameId)
+        public JsonResult NewGame(string color, int? gameId, int? playerId)
         {
             Color colorEnum = convertColor(color);
             JsonResult result = new JsonResult();
@@ -30,10 +30,10 @@ namespace PRO150.Controllers
                 }
                 else
                 {
-                    Player p1 = new Player(colorEnum);
+                    Player p1 = new Player(colorEnum, newPlayerId());
                     game = new Game(p1, newGameId());
                     games.Add(game);
-                    result.Data = "{\"gameId\":" + game.gameId +"}";
+                    result.Data = "{\"gameId\":" + game.gameId + ",\"playerId\":" + game.p1.playerId + "}";
                 }
             }
             else
@@ -47,9 +47,14 @@ namespace PRO150.Controllers
                     }
                     else
                     {
-                        Player p2 = new Player(colorEnum);
+                        int id = newPlayerId();
+                        while (game.p1.playerId == id)
+                        {
+                            id = newPlayerId();
+                        }
+                        Player p2 = new Player(colorEnum, newPlayerId());
                         game.addPlayer(p2);
-                        result.Data = "{\"gameId\":" + game.gameId + "}";
+                        result.Data = "{\"gameId\":" + game.gameId + ",\"playerId\":" + game.p2.playerId + "}";
                     }
                 }
                 else
@@ -58,6 +63,33 @@ namespace PRO150.Controllers
                 }
             }
             return result;
+        }
+        public JsonResult Move(int gameId, int playerId, string move)
+        {
+            JsonResult result = new JsonResult();
+            result.ContentType = "application/json";
+            Game game;
+            if (gameExists(gameId, out game))
+            {
+                if (game.p1.playerId == playerId || game.p2.playerId == playerId)
+                {
+                    Player p;
+                    if (game.p1.playerId == playerId) { p = game.p1; }
+                    else { p = game.p2; }
+                    if(game.playerTurnId == p.playerId)
+                    {
+                        string[] moves = move.Split(' ');
+                        if(moves.Count() != 0)
+                        {
+ //I AM HERE                           
+                        }
+                        result.Data = "{\"error\":" + "Invalid move" + ",\"move\":" + move + "}";
+                    }
+                    result.Data = "{\"error\":" + "It's Not Your Turn" + "}";
+                }
+                result.Data = "{\"error\":" + "Invalid playerId" + ",\"playerId\":" + playerId + "}";
+            }
+            result.Data = "{\"error\":" + "Game Does Not Exist" + "}";
         }
 
         private bool gameExists(int? gameId, out Game gameToFind)
@@ -75,6 +107,12 @@ namespace PRO150.Controllers
             }
             gameToFind = null;
             return false;
+        }
+        private int newPlayerId()
+        {
+            Random rand = new Random();
+            int id = rand.Next();
+            return id;
         }
 
         private Color convertColor(string color)

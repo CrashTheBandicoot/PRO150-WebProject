@@ -9,7 +9,7 @@ namespace PRO150.Models
     {
         public Color color;
         public bool isKing;
-        public Piece(Color newColor, Player pieceOwner)
+        public Piece(Color newColor)
         {
             color = newColor;
             isKing = false;

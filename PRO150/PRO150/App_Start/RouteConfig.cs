@@ -15,8 +15,8 @@ namespace PRO150
 
             routes.MapRoute(
                 name: "NewGame",
-                url: "newgame/{color}/{gameId}",
-                defaults: new { controller = "Home", action = "NewGame", gameId = UrlParameter.Optional }
+                url: "newgame/{color}/{gameId}/{playerId}",
+                defaults: new { controller = "Home", action = "NewGame", gameId = UrlParameter.Optional, playerId = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "Default",

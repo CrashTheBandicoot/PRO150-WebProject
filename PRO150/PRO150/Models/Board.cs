@@ -50,10 +50,10 @@ namespace PRO150.Models
             boardSquares[statingX, startingY].removePiece();
             boardSquares[endingX, endingY].addPiece(piece);
         }
-
-        private bool validMove(Player player, int statingX, int startingY, int endingX, int endingY, out string errorMessage)
+        //does NOT include multiple jumps
+        private bool validMove(Player player, int startingX, int startingY, int endingX, int endingY, out string errorMessage)
         {
-            if(!boardSquares[statingX, startingY].hasPiece())
+            if(!boardSquares[startingX, startingY].hasPiece())
             {
                 errorMessage = "There is not a piece on that square";
                 return false;
@@ -63,20 +63,109 @@ namespace PRO150.Models
                 errorMessage = "That square has a piece on it";
                 return false;
             }
-            else if(boardSquares[endingX, endingY].color == Color.Red || boardSquares[statingX, startingY].color == Color.Red)
+            else if(boardSquares[endingX, endingY].color == Color.Red || boardSquares[startingX, startingY].color == Color.Red)
             {
                 errorMessage = "Pieces can only be placed on Black squares";
                 return false;
             }
-            Piece piece = boardSquares[statingX, startingY].playerPiece;
-            if(!player.playerPieces.Contains(piece))
+            Piece piece = boardSquares[startingX, startingY].playerPiece;
+            if(player.playerPieces.Contains(piece))
             {
-                errorMessage = "You can't move your opponent's piece";
+                if(player.pieceColor == Color.Black && !piece.isKing)
+                {
+                    if ((startingX + 1 == endingX || startingX - 1 == endingX) && startingY + 1 == endingY)
+                    {
+                        errorMessage = "";
+                        return true;
+                    }
+                    else if (startingX - 2 == endingX && startingY + 2 == endingY)
+                    {
+                        if (boardSquares[startingX - 1, startingY + 1].hasPiece() && boardSquares[startingX - 1, startingY + 1].playerPiece.color != player.pieceColor)
+                        {
+                            errorMessage = "";
+                            return true;
+                        }
+                    }
+                    else if (startingX + 2 == endingX && startingY + 2 == endingY)
+                    {
+                        if (boardSquares[startingX + 1, startingY + 1].hasPiece() && boardSquares[startingX + 1, startingY + 1].playerPiece.color != player.pieceColor)
+                        {
+                            errorMessage = "";
+                            return true;
+                        }
+                    }
+                }
+                else if(player.pieceColor == Color.Red && !piece.isKing)
+                {
+                    if ((startingX + 1 == endingX || startingX - 1 == endingX) && startingY - 1 == endingY)
+                    {
+                        errorMessage = "";
+                        return true;
+                    }
+                    else if (startingX - 2 == endingX && startingY - 2 == endingY)
+                    {
+                        if (boardSquares[startingX - 1, startingY - 1].hasPiece() && boardSquares[startingX - 1, startingY - 1].playerPiece.color != player.pieceColor)
+                        {
+                            errorMessage = "";
+                            return true;
+                        }
+                    }
+                    else if (startingX + 2 == endingX && startingY - 2 == endingY)
+                    {
+                        if (boardSquares[startingX + 1, startingY - 1].hasPiece() && boardSquares[startingX + 1, startingY - 1].playerPiece.color != player.pieceColor)
+                        {
+                            errorMessage = "";
+                            return true;
+                        }
+                    }
+                }
+                else if (piece.isKing)
+                {
+                    if ((startingX + 1 == endingX || startingX - 1 == endingX) && (startingY + 1 == endingY || startingY -1 == endingY))
+                    {
+                        errorMessage = "";
+                        return true;
+                    }
+                    else if (startingX - 2 == endingX && startingY + 2 == endingY)
+                    {
+                        if (boardSquares[startingX - 1, startingY + 1].hasPiece() && boardSquares[startingX - 1, startingY + 1].playerPiece.color != player.pieceColor)
+                        {
+                            errorMessage = "";
+                            return true;
+                        }
+                    }
+                    else if (startingX + 2 == endingX && startingY + 2 == endingY)
+                    {
+                        if (boardSquares[startingX + 1, startingY + 1].hasPiece() && boardSquares[startingX + 1, startingY + 1].playerPiece.color != player.pieceColor)
+                        {
+                            errorMessage = "";
+                            return true;
+                        }
+                    }
+                    else if (startingX - 2 == endingX && startingY - 2 == endingY)
+                    {
+                        if (boardSquares[startingX - 1, startingY - 1].hasPiece() && boardSquares[startingX - 1, startingY - 1].playerPiece.color != player.pieceColor)
+                        {
+                            errorMessage = "";
+                            return true;
+                        }
+                    }
+                    else if (startingX + 2 == endingX && startingY - 2 == endingY)
+                    {
+                        if (boardSquares[startingX + 1, startingY - 1].hasPiece() && boardSquares[startingX + 1, startingY - 1].playerPiece.color != player.pieceColor)
+                        {
+                            errorMessage = "";
+                            return true;
+                        }
+                    }
+                }
+                errorMessage = "You can't move to that square";
                 return false;
             }
             else
             {
-                if(player.pieceColor)
+                errorMessage = "You can't move your opponent's piece";
+                return false;
             }
         }
     }

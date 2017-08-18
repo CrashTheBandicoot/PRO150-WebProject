@@ -7,9 +7,10 @@ namespace PRO150.Models
 {
     public class Game
     {
-        Player p1;
-        Player p2;
-        Board gameBoard;
+        public Player p1;
+        public Player p2;
+        public Board gameBoard;
+        public int playerTurnId;
         public int gameId;
         public Game(Player player, int id)
         {
