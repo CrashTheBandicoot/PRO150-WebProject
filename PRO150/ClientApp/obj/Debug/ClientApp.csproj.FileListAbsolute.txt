@@ -44,3 +44,4 @@ C:\Users\Kimberly Nicole\Desktop\SchoolStuff\PRO150WebProject\PRO150\ClientApp\b
 C:\Users\Kimberly Nicole\Desktop\SchoolStuff\PRO150WebProject\PRO150\ClientApp\bin\System.Web.Mvc.xml
 C:\Users\Kimberly Nicole\Desktop\SchoolStuff\PRO150WebProject\PRO150\ClientApp\obj\Debug\ClientApp.dll
 C:\Users\Kimberly Nicole\Desktop\SchoolStuff\PRO150WebProject\PRO150\ClientApp\obj\Debug\ClientApp.pdb
+C:\Users\Kimberly Nicole\Desktop\SchoolStuff\PRO150WebProject\PRO150\ClientApp\obj\Debug\ClientApp.csprojResolveAssemblyReference.cache

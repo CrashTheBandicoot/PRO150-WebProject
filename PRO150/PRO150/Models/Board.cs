@@ -51,7 +51,7 @@ namespace PRO150.Models
             boardSquares[endingX, endingY].addPiece(piece);
         }
         //does NOT include multiple jumps
-        private bool validMove(Player player, int startingX, int startingY, int endingX, int endingY, out string errorMessage)
+        public bool validMove(Player player, int startingX, int startingY, int endingX, int endingY, out string errorMessage)
         {
             if(!boardSquares[startingX, startingY].hasPiece())
             {

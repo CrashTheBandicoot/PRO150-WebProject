@@ -12,6 +12,12 @@
 </head>
 <body>
     <div> 
+        <p1>Would you like to?</p1><br/>
+        <p2>Make a new game</p2>
+        @Html.CheckBox("newGame",false, new { @class = "form=control" })<br/>
+        <p1>Or?</p1><br/>
+        <p2>Join a game</p2>
+        @Html.CheckBox("joinGame", false, new { @class = "form=control" })
     </div>
 </body>
 </html>

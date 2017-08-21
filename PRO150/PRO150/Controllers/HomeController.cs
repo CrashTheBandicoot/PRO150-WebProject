@@ -11,6 +11,7 @@ namespace PRO150.Controllers
     {
         // GET: Home
         //Validation of input will be here
+        public JsonRequestBehavior behavior = JsonRequestBehavior.AllowGet;
         private static List<Game> games = new List<Game>();
         public ActionResult Index()
         {
@@ -62,7 +63,7 @@ namespace PRO150.Controllers
                     result.Data = "{\"error\":" + "Game Does Not Exist" + "}";
                 }
             }
-            return result;
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Move(int gameId, int playerId, string move)
         {
@@ -79,9 +80,39 @@ namespace PRO150.Controllers
                     if(game.playerTurnId == p.playerId)
                     {
                         string[] moves = move.Split(' ');
-                        if(moves.Count() != 0)
+                        if (moves.Count() > 1)
                         {
- //I AM HERE                           
+                            string possibleError = "";
+                            bool validMoves = true;
+                            for (int i = 0; i < moves.Count(); i++)
+                            {
+                                int startingX;
+                                int startingY;
+                                int endingX;
+                                int endingY;
+                                convertMove(moves[i], out startingX, out startingY);
+                                convertMove(moves[i+1], out endingX, out endingY);
+                                if (!game.gameBoard.validMove(p, startingX, startingY, endingX, endingY, out possibleError))
+                                {
+                                    validMoves = false;
+                                    break;
+                                }
+                            }
+                            if (validMoves)
+                            {
+                                for (int i = 0; i < moves.Count(); i++)
+                                {
+                                    int startingX;
+                                    int startingY;
+                                    int endingX;
+                                    int endingY;
+                                    convertMove(moves[i], out startingX, out startingY);
+                                    convertMove(moves[i + 1], out endingX, out endingY);
+                                    game.gameBoard.movePiece(startingX, startingY, endingX, endingY);
+                                }
+                                result.Data = "{\"success\":" + "move successful" + "}";
+                            }
+                            result.Data = "{\"error\":" + possibleError + "}";                       
                         }
                         result.Data = "{\"error\":" + "Invalid move" + ",\"move\":" + move + "}";
                     }
@@ -90,8 +121,8 @@ namespace PRO150.Controllers
                 result.Data = "{\"error\":" + "Invalid playerId" + ",\"playerId\":" + playerId + "}";
             }
             result.Data = "{\"error\":" + "Game Does Not Exist" + "}";
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
-
         private bool gameExists(int? gameId, out Game gameToFind)
         {
             if (gameId != null)
@@ -114,7 +145,6 @@ namespace PRO150.Controllers
             int id = rand.Next();
             return id;
         }
-
         private Color convertColor(string color)
         {
             color = color.ToLower();
@@ -126,6 +156,25 @@ namespace PRO150.Controllers
                 default: colorEnum = Color.NOT_VALID; break;
             }
             return colorEnum;
+        }
+        private void convertMove(string move, out int x, out int y)
+        {
+            char[] temp = move.ToCharArray();
+            char alpha = temp[0];
+            int numaric = char.Parse(temp[1].ToString());
+            switch (alpha.ToString().ToLower())
+            {
+                case "a": x = 0; break;
+                case "b": x = 1; break;
+                case "c": x = 2; break;
+                case "d": x = 3; break;
+                case "e": x = 4; break;
+                case "f": x = 5; break;
+                case "g": x = 6; break;
+                case "h": x = 7; break;
+                default: x = -1; break;
+            }
+            y = numaric - 1;
         }
         private int newGameId()
         {
