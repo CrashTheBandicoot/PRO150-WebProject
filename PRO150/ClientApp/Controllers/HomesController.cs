@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ClientApp.Controllers
 {
-    public class HomeController : Controller
+    public class HomesController : Controller
     {
         
         // GET: Home
@@ -16,8 +16,8 @@ namespace ClientApp.Controllers
         }
         public ActionResult newGame(string color, int? gameId, int? playerId)
         {
-
-            //PRO150.Controllers.HomeController.NewGame(color, gameId, playerId);
+            var result = Redirect("localHost:24182/newgame/"+color+"/"+gameId+"/"+playerId);
+            ViewBag.json = result;
             return View();
         }
     }

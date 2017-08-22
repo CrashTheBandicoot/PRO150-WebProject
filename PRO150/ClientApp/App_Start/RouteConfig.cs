@@ -16,17 +16,17 @@ namespace ClientApp
             routes.MapRoute(
                 name: "Move",
                 url: "move/{gameId}/{playerId}/{move}",
-                defaults: new { controller = "Home", action = "Move" }
+                defaults: new { controller = "Homes", action = "Move" }
             );
             routes.MapRoute(
                 name: "NewGame",
                 url: "newgame/{color}/{gameId}/{playerId}",
-                defaults: new { controller = "Home", action = "NewGame",color = UrlParameter.Optional, gameId = UrlParameter.Optional, playerId = UrlParameter.Optional }
+                defaults: new { controller = "Homes", action = "NewGame", color = UrlParameter.Optional, gameId = UrlParameter.Optional, playerId = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Homes", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
