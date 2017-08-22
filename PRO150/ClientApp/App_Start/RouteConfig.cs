@@ -14,19 +14,24 @@ namespace ClientApp
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "MakeTheNewGame",
+                url: "makenewgame",
+                defaults: new { controller = "Home", action = "MakeNewGame" }
+            );
+            routes.MapRoute(
                 name: "Move",
                 url: "move/{gameId}/{playerId}/{move}",
-                defaults: new { controller = "Homes", action = "Move" }
+                defaults: new { controller = "Home", action = "Move" }
             );
             routes.MapRoute(
                 name: "NewGame",
                 url: "newgame/{color}/{gameId}/{playerId}",
-                defaults: new { controller = "Homes", action = "NewGame", color = UrlParameter.Optional, gameId = UrlParameter.Optional, playerId = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "NewGame", color = UrlParameter.Optional, gameId = UrlParameter.Optional, playerId = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Homes", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

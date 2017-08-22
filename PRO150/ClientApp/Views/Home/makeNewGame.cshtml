@@ -1,0 +1,20 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>makeNewGame</title>
+</head>
+<body>
+    <div> 
+        <p1>Please select a color</p1>
+        @Html.DropDownList("ColorChoice")
+        <button name="buildGameButton" onclick="location.href='@Url.Action("NewGame")'">Build Game</button>
+    </div>
+</body>
+</html>

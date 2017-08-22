@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <p1>Would you like a?</p1><br/>
+        <button name="newGameButton" onclick="location.href='@Url.Action("MakeNewGame")'">New Game</button><br/>
+        <p1>Or to?</p1><br/>        
+        <button name="joinGameButton" onclick="location.href='@Url.Action("NewGame")'">Join Game</button>
+    </div>
+</body>
+</html>
