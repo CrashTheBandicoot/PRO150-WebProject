@@ -42,21 +42,15 @@ namespace PRO150.Controllers
                 Game game;
                 if (gameExists(gameId, out game))
                 {
-                    if (colorEnum == Color.NOT_VALID)
+                    if (game.p1.pieceColor == Color.Black) { colorEnum = Color.Red; } else { colorEnum = Color.Black; }
+                    int id = newPlayerId();
+                    while (game.p1.playerId == id)
                     {
-                        result.Data = "{\"error\":" + "Invalid Color" + "\"Invalid Color\":" + color + "}";
+                        id = newPlayerId();
                     }
-                    else
-                    {
-                        int id = newPlayerId();
-                        while (game.p1.playerId == id)
-                        {
-                            id = newPlayerId();
-                        }
-                        Player p2 = new Player(colorEnum, newPlayerId());
-                        game.addPlayer(p2);
-                        result.Data = "{\"gameId\":" + game.gameId + ",\"playerId\":" + game.p2.playerId + "}";
-                    }
+                    Player p2 = new Player(colorEnum, newPlayerId());
+                    game.addPlayer(p2);
+                    result.Data = "{\"gameId\":" + game.gameId + ",\"playerId\":" + game.p2.playerId + "}";
                 }
                 else
                 {
