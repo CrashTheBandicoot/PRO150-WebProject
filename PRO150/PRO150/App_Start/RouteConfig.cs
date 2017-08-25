@@ -14,6 +14,11 @@ namespace PRO150
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Default",
+                url: "availablegames",
+                defaults: new { controller = "Home", action = "AvailableGames" }
+            );
+            routes.MapRoute(
                 name: "Move",
                 url: "move/{gameId}/{playerId}/{move}",
                 defaults: new { controller = "Home", action = "Move" }

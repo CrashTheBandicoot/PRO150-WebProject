@@ -16,9 +16,9 @@ namespace ClientApp.Controllers
         }
         public ActionResult NewGame(string color, int? gameId, int? playerId)
         {
-            var result = Redirect("localHost:24182/newgame/"+color+"/"+gameId+"/"+playerId);
+            var result = Redirect("localHost:24182/newgame/" + color + "/" + gameId + "/" + playerId);
             ViewBag.json = result;
-            return View();
+            return RedirectToAction("PlayGame");
         }
         public ActionResult MakeNewGame()
         {
@@ -30,10 +30,21 @@ namespace ClientApp.Controllers
             ViewBag.ColorChoice = items;
             return View();
         }
+        public ActionResult JoinGame()
+        {
+            //THIS IS THE URL TO GO TO -> "localHost:24182/availablegames/"
+            //RETURNS A LIST OF GAMES
+            //NEED TO PASS IT IN TO THE VIEW TO DISPLAY
+            List<SelectListItem> items = new List<SelectListItem>()
+            {
+
+            };
+            ViewBag.Games = items;
+            return View();
+        }
         public ActionResult PlayGame()
         {
             return View();
         }
-
     }
 }

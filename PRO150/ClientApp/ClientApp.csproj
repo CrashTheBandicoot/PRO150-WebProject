@@ -89,9 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="images\blackPiece.png" />
-    <Content Include="images\checkerboard.png" />
-    <Content Include="images\redPiece.png" />
+    <Content Include="Scripts\GameBoard.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -106,9 +104,9 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\NewGame.cshtml" />
     <Content Include="Views\Home\MakeNewGame.cshtml" />
     <Content Include="Views\Home\PlayGame.cshtml" />
+    <Content Include="Views\Home\JoinGame.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

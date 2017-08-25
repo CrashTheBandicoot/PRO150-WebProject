@@ -13,6 +13,7 @@ namespace PRO150.Controllers
         //Validation of input will be here
         public JsonRequestBehavior behavior = JsonRequestBehavior.AllowGet;
         private static List<Game> games = new List<Game>();
+        private static List<Game> availableGames = new List<Game>();
         public ActionResult Index()
         {
             return View();
@@ -34,6 +35,7 @@ namespace PRO150.Controllers
                     Player p1 = new Player(colorEnum, newPlayerId());
                     game = new Game(p1, newGameId());
                     games.Add(game);
+                    availableGames.Add(game);
                     result.Data = "{\"gameId\":" + game.gameId + ",\"playerId\":" + game.p1.playerId + "}";
                 }
             }
@@ -50,6 +52,7 @@ namespace PRO150.Controllers
                     }
                     Player p2 = new Player(colorEnum, newPlayerId());
                     game.addPlayer(p2);
+                    availableGames.Remove(game);
                     result.Data = "{\"gameId\":" + game.gameId + ",\"playerId\":" + game.p2.playerId + "}";
                 }
                 else
@@ -58,6 +61,10 @@ namespace PRO150.Controllers
                 }
             }
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult AvailableGames()
+        {
+            return Json(availableGames, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Move(int gameId, int playerId, string move)
         {
