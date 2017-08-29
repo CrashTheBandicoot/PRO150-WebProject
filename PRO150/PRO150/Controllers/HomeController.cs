@@ -13,12 +13,13 @@ namespace PRO150.Controllers
         //Validation of input will be here
         public JsonRequestBehavior behavior = JsonRequestBehavior.AllowGet;
         private static List<Game> games = new List<Game>();
-        private static List<Game> availableGames = new List<Game>();
+        private static List<int> availableGameIds = new List<int>();
+        //FOR WHEN I NEED TO SEE MY JsonResults
         public ActionResult Index()
         {
             return View();
         }
-        public JsonResult NewGame(string color, int? gameId, int? playerId)
+        public JsonResult NewGame(string color, int? gameId)
         {
             Color colorEnum = convertColor(color);
             JsonResult result = new JsonResult();
@@ -35,7 +36,7 @@ namespace PRO150.Controllers
                     Player p1 = new Player(colorEnum, newPlayerId());
                     game = new Game(p1, newGameId());
                     games.Add(game);
-                    availableGames.Add(game);
+                    availableGameIds.Add(game.gameId);
                     result.Data = "{\"gameId\":" + game.gameId + ",\"playerId\":" + game.p1.playerId + "}";
                 }
             }
@@ -52,7 +53,7 @@ namespace PRO150.Controllers
                     }
                     Player p2 = new Player(colorEnum, newPlayerId());
                     game.addPlayer(p2);
-                    availableGames.Remove(game);
+                    availableGameIds.Remove(game.gameId);
                     result.Data = "{\"gameId\":" + game.gameId + ",\"playerId\":" + game.p2.playerId + "}";
                 }
                 else
@@ -64,7 +65,7 @@ namespace PRO150.Controllers
         }
         public JsonResult AvailableGames()
         {
-            return Json(availableGames, JsonRequestBehavior.AllowGet);
+            return Json(availableGameIds, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Move(int gameId, int playerId, string move)
         {
