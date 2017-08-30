@@ -1,0 +1,20 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>JoinGame</title>
+</head>
+<body>
+    <div> 
+        <p1>Please select a game to join</p1>
+        @Html.DropDownList("Games")
+        <button name="buildGameButton" onclick="location.href='@Url.Action("Game")'">Join</button>
+    </div>
+</body>
+</html>
