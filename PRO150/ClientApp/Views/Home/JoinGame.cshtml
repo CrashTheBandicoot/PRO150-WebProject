@@ -15,7 +15,7 @@
     <div> 
         @using (Html.BeginForm())
         {
-            <p1>Please select a game to join</p1>
+            <h1>Please select a game to join</h1>
             @Html.DropDownListFor(m => m.gameId, Model.GameChoices)
             <input type="submit" value="Join Game" />
         }

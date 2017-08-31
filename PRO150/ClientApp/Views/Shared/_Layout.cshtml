@@ -17,10 +17,10 @@
                 break;
         }
         @RenderSection("Turn")
-        @if (ViewBag.HasError)
-        {
-            RenderSection("Error",false);
-        }
+        <br />
+        @RenderSection("MoveError");
+        <br />
+        @RenderSection("Waiting");
     </div>
 </body>
 </html>

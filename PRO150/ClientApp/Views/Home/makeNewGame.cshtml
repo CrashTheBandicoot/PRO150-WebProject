@@ -15,7 +15,7 @@
     <div> 
         @using (Html.BeginForm())
         {
-            <p1>Please select a color</p1>
+            <h1>Please select a color</h1>
             @Html.DropDownListFor(m => m.Color, Model.ColorChoice)
             <input type="submit" value="Build Game" />
         }

@@ -136,40 +136,40 @@ namespace ClientApp.Controllers
             //call service to find turn
             string gamestate = "";
             int playerturnid = 0;
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(BaseUrl);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.GetAsync(string.Concat("http://localhost:24182/gamestate/", game.gameId));
-                if (res.IsSuccessStatusCode)
-                {
-                    string content = await res.Content.ReadAsStringAsync();
-                    JsonSerializer jsonserializer = new JsonSerializer();
-                    JsonReader jsonreader = new JsonTextReader(new StringReader(content));
-                    JObject jsonobject = (JObject)jsonserializer.Deserialize(jsonreader);
-                    string data = (String)jsonobject.GetValue("Data");
-                    jsonreader = new JsonTextReader(new StringReader(data));
-                    JObject dataobject = (JObject)jsonserializer.Deserialize(jsonreader);
-                    gamestate = (String)dataobject.GetValue("gamestate");
-                    playerturnid = Int32.Parse((string)dataobject.GetValue("playerturnid"));
-                }
-            }
-            if (gamestate.Equals("inprogress"))
-            {
-                if (game.playerId == playerturnid)
-                {
-                    ViewBag.player = "your";
-                }
-                else
-                {
-                    ViewBag.player = "opponent's";
-                }
-            }
-            else if (gamestate.Equals("waitingforsecond"))
-            {
-                ViewBag.parts = "waiting";
-            }
+            //using (var client = new HttpClient())
+            //{
+            //    client.BaseAddress = new Uri(BaseUrl);
+            //    client.DefaultRequestHeaders.Clear();
+            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //    HttpResponseMessage res = await client.GetAsync(string.Concat("http://localhost:24182/gamestate/", game.gameId));
+            //    if (res.IsSuccessStatusCode)
+            //    {
+            //        string content = await res.Content.ReadAsStringAsync();
+            //        JsonSerializer jsonserializer = new JsonSerializer();
+            //        JsonReader jsonreader = new JsonTextReader(new StringReader(content));
+            //        JObject jsonobject = (JObject)jsonserializer.Deserialize(jsonreader);
+            //        string data = (String)jsonobject.GetValue("Data");
+            //        jsonreader = new JsonTextReader(new StringReader(data));
+            //        JObject dataobject = (JObject)jsonserializer.Deserialize(jsonreader);
+            //        gamestate = (String)dataobject.GetValue("gamestate");
+            //        playerturnid = Int32.Parse((string)dataobject.GetValue("playerturnid"));
+            //    }
+            //}
+            //if (gamestate.Equals("inprogress"))
+            //{
+            //    if (game.playerId == playerturnid)
+            //    {
+            //        ViewBag.player = "your";
+            //    }
+            //    else
+            //    {
+            //        ViewBag.player = "opponent's";
+            //    }
+            //}
+            //else if (gamestate.Equals("waitingforsecond"))
+            //{
+            //    ViewBag.parts = "waiting";
+            //}
             return View();
         }
     }
