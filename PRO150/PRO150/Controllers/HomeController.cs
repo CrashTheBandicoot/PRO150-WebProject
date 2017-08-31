@@ -125,6 +125,21 @@ namespace PRO150.Controllers
             result.Data = "{\"error\":" + "Game Does Not Exist" + "}";
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GameState(int gameId)
+        {
+            JsonResult result = new JsonResult();
+            result.ContentType = "application/json";
+            Game game;
+            if(gameExists(gameId, out game))
+            {
+                result.Data = "{\"gameState\":" + game.state.ToString() + ",\"playerTurnId\":"+ game.playerTurnId + "}";
+            }
+            else
+            {
+                result.Data = "{\"error\":" + "Game Does Not Exist" + "}";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         private bool gameExists(int? gameId, out Game gameToFind)
         {
             if (gameId != null)

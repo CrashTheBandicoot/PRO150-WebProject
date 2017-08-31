@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRO150", "PRO150\PRO150.csproj", "{814E75F6-F9ED-4C16-ADCE-555B877CEF98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientApp", "ClientApp\ClientApp.csproj", "{B604BB90-0C25-4342-83D6-28FC3D945D17}"
+	ProjectSection(ProjectDependencies) = postProject
+		{814E75F6-F9ED-4C16-ADCE-555B877CEF98} = {814E75F6-F9ED-4C16-ADCE-555B877CEF98}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

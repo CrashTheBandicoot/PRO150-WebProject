@@ -12,15 +12,18 @@ namespace PRO150.Models
         public Board gameBoard;
         public int playerTurnId;
         public int gameId;
+        public GameState state;
         public Game(Player player, int id)
         {
             p1 = player;
             gameId = id;
+            state = GameState.WaitingForSecond;
         }
         public void addPlayer(Player player)
         {
             p2 = player;
             gameBoard = new Board(p1.playerPieces, p2.playerPieces);
+            state = GameState.InProgress;
         }
     }
 }

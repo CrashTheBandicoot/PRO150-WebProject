@@ -1,5 +1,7 @@
-﻿@{
-    Layout = null;
+﻿@using ClientApp.Models
+@model MoveModel
+@{
+
 }
 
 <!DOCTYPE html>
@@ -13,6 +15,34 @@
     <div> 
         <canvas id="gameBoard" width="480" height="480"></canvas>
     </div>
+    @section MoveError{
+        <div>
+            <h1>Oh no there was an error in your move.</h1>
+            <p>@ViewBag.Error Please try again.</p>
+        </div>
+    }
+    @section Turn{
+        <div>
+            <h1>It's @ViewBag.Player turn.</h1>
+            @if (ViewBag.Player == "Your")
+            {
+                using (Html.BeginForm())
+                {
+                    <h1>Please select a piece to move</h1>
+                    @Html.DropDownListFor(m => m.Move, Model.Moves)
+                    <h1>And where to move it too.</h1>
+                    @Html.DropDownListFor(m => m.Piece, Model.Pieces)
+                    <input type="submit" value="Submit" />
+                }
+            }
+        </div>
+    }
+    @section Waiting{
+        <div>
+            <h1>Sorry you don't have an opponent yet.</h1>
+            <h1>Try again later.</h1>
+        </div>
+    }
     <script src="~/Scripts/GameBoard.js"></script>
 </body>
 </html>

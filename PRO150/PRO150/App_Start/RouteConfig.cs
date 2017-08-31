@@ -19,6 +19,11 @@ namespace PRO150
                 defaults: new { controller = "Home", action = "AvailableGames" }
             );
             routes.MapRoute(
+                name: "GameSate",
+                url: "gamestate/{gameId}",
+                defaults: new { controller = "Home", action = "GameState" }
+            );
+            routes.MapRoute(
                name: "NewGame",
                url: "newgame/{color}/{gameId}/",
                defaults: new { controller = "Home", action = "NewGame", gameId = UrlParameter.Optional }

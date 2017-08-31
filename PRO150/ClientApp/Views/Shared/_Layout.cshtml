@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div> 
+        @RenderBody()
+        @switch (ViewBag.Player)
+        {
+            case "Your": ViewBag.Player = "Your";
+                break;
+            default: ViewBag.Player = "Opponent's";
+                break;
+        }
+        @RenderSection("Turn")
+        @if (ViewBag.HasError)
+        {
+            RenderSection("Error",false);
+        }
+    </div>
+</body>
+</html>

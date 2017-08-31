@@ -105,7 +105,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\MyObject.cs" />
+    <Compile Include="Models\GameIdModel.cs" />
+    <Compile Include="Models\GameObject.cs" />
+    <Compile Include="Models\MoveModel.cs" />
+    <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +118,8 @@
     <Content Include="Views\Home\MakeNewGame.cshtml" />
     <Content Include="Views\Home\PlayGame.cshtml" />
     <Content Include="Views\Home\JoinGame.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -19,19 +19,19 @@ namespace ClientApp
                 defaults: new { controller = "Home", action = "MakeNewGame" }
             );
             routes.MapRoute(
+                name: "Game",
+                url: "newgame",
+                defaults: new { controller = "Home", action = "Game" }
+            );
+            routes.MapRoute(
                 name: "Play",
-                url: "playgame/{gameId}/{playerId}",
+                url: "playgame/{game}",
                 defaults: new { controller = "Home", action = "PlayGame" }
             );
             routes.MapRoute(
                 name: "Move",
-                url: "move/{gameId}/{playerId}/{move}",
+                url: "move/{game}/{move}",
                 defaults: new { controller = "Home", action = "Move" }
-            );
-            routes.MapRoute(
-                name: "Game",
-                url: "newgame/{color}/{gameId}",
-                defaults: new { controller = "Home", action = "Game", color = "", gameId = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "Default",

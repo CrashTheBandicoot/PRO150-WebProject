@@ -1,4 +1,5 @@
-﻿
+﻿@using ClientApp.Models
+@model PlayerModel
 @{
     Layout = null;
 }
@@ -12,9 +13,12 @@
 </head>
 <body>
     <div> 
-        <p1>Please select a color</p1>
-        @Html.DropDownList("ColorChoice")
-        <button name="buildGameButton" onclick="location.href='@Url.Action("Game")'">Build Game</button>
+        @using (Html.BeginForm())
+        {
+            <p1>Please select a color</p1>
+            @Html.DropDownListFor(m => m.Color, Model.ColorChoice)
+            <input type="submit" value="Build Game" />
+        }
     </div>
 </body>
 </html>
